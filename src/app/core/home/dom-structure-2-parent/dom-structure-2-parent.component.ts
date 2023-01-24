@@ -32,7 +32,7 @@ export class DomStructure2ParentComponent implements AfterViewChecked {
   }
 
   ngAfterViewInit() {
-    this.viewcontainer.createEmbeddedView(this.template);
+    // this.viewcontainer.createEmbeddedView(this.template);
   }
 
   removeChild() {

@@ -12,6 +12,14 @@ export const APP_ROUTES: Routes = [
     title: 'Home Page',
     component: HomeComponent,
   },
+  {
+    path: 'dyn',
+    title: 'Dynamic Components',
+    loadComponent: () =>
+      import('./dynamicComponents/main/main.component').then(
+        (m) => m.MainComponent
+      ),
+  },
   // Option 1: Lazy Loading another Routing Config
   // {
   //   path: 'user-details',

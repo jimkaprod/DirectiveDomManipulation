@@ -14,3 +14,9 @@
 
 <h3 class="mt-5">list</h3>
 <ul #myList></ul>
+
+<ng-template #listItemTpl>
+  <li *ngFor="let item of listItems">{{ item }}</li>
+  <li>1</li>
+  <li>2</li>
+</ng-template>

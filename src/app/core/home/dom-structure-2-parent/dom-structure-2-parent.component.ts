@@ -1,15 +1,18 @@
-import { NgIf } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import {
   AfterViewChecked,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ElementRef,
+  EmbeddedViewRef,
   QueryList,
   Renderer2,
   TemplateRef,
   ViewChild,
   ViewChildren,
   ViewContainerRef,
+  ViewRef,
 } from '@angular/core';
 import { DomStructure1ChildComponent } from '../dom-structure-1-child/dom-structure-1-child.component';
 
@@ -18,7 +21,7 @@ import { DomStructure1ChildComponent } from '../dom-structure-1-child/dom-struct
   templateUrl: './dom-structure-2-parent.component.html',
   styleUrls: ['./dom-structure-2-parent.component.css'],
   standalone: true,
-  imports: [DomStructure1ChildComponent, NgIf],
+  imports: [DomStructure1ChildComponent, NgIf, NgFor],
   // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DomStructure2ParentComponent implements AfterViewChecked {
@@ -29,9 +32,15 @@ export class DomStructure2ParentComponent implements AfterViewChecked {
 
   @ViewChild('simpleRef') simpleRef: ElementRef;
 
+  @ViewChild('myList', { read: ViewContainerRef }) myList: ViewContainerRef;
+  @ViewChild('listItemTpl') listItemTpl: TemplateRef<null>;
   checked: boolean;
 
-  constructor(private renderer: Renderer2, private host: ElementRef) {}
+  listItems = ['one', 'two'];
+
+  myView: EmbeddedViewRef<unknown>;
+
+  constructor(private renderer: Renderer2, private host: ElementRef, private cdRef:ChangeDetectorRef) {}
 
   ngOnInit() {
     this.checked = true;
@@ -44,6 +53,9 @@ export class DomStructure2ParentComponent implements AfterViewChecked {
 
   ngAfterViewInit() {
     this.viewcontainer.createEmbeddedView(this.template);
+    let view = this.listItemTpl.createEmbeddedView(null);
+    this.myList.insert(view);
+    this.cdRef.detectChanges();
   }
 
   removeChild() {

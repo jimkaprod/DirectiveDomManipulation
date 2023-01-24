@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import {
   AfterViewChecked,
   Component,
@@ -16,7 +17,7 @@ import { DomStructure1ChildComponent } from '../dom-structure-1-child/dom-struct
   templateUrl: './dom-structure-2-parent.component.html',
   styleUrls: ['./dom-structure-2-parent.component.css'],
   standalone: true,
-  imports: [DomStructure1ChildComponent],
+  imports: [DomStructure1ChildComponent, NgIf],
 })
 export class DomStructure2ParentComponent implements AfterViewChecked {
   @ViewChildren('child', { read: ElementRef })
@@ -24,10 +25,16 @@ export class DomStructure2ParentComponent implements AfterViewChecked {
   @ViewChild('viewcontainer', { read: ViewContainerRef }) viewcontainer;
   @ViewChild(TemplateRef) template: TemplateRef<null>;
 
+  checked: boolean;
+
   constructor(private renderer: Renderer2, private host: ElementRef) {}
 
+  ngOnInit() {
+    this.checked = true;
+  }
+
   ngAfterViewChecked() {
-    // console.log('Child components count', this.childsComp.length);
+    console.log('Child components count', this.childsComp.length);
   }
 
   ngAfterViewInit() {
@@ -36,5 +43,10 @@ export class DomStructure2ParentComponent implements AfterViewChecked {
 
   removeChild() {
     this.viewcontainer.remove();
+  }
+
+  checker(): boolean {
+    console.log('checker >>>');
+    return true;
   }
 }

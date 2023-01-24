@@ -3,4 +3,9 @@
 <ng-template #t>
   <app-dom-structure-1-child #child></app-dom-structure-1-child>
 </ng-template>
+
+<div *ngIf="checker()">yeah</div>
+
+<div *ngIf="checked">yo</div>
+
 <button (click)="removeChild()">remove child</button>

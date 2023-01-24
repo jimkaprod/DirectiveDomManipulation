@@ -1,6 +1,7 @@
 import { NgIf } from '@angular/common';
 import {
   AfterViewChecked,
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   QueryList,
@@ -18,12 +19,15 @@ import { DomStructure1ChildComponent } from '../dom-structure-1-child/dom-struct
   styleUrls: ['./dom-structure-2-parent.component.css'],
   standalone: true,
   imports: [DomStructure1ChildComponent, NgIf],
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DomStructure2ParentComponent implements AfterViewChecked {
   @ViewChildren('child', { read: ElementRef })
   childsComp: QueryList<ElementRef>;
   @ViewChild('viewcontainer', { read: ViewContainerRef }) viewcontainer;
   @ViewChild(TemplateRef) template: TemplateRef<null>;
+
+  @ViewChild('simpleRef') simpleRef: ElementRef;
 
   checked: boolean;
 
@@ -35,6 +39,7 @@ export class DomStructure2ParentComponent implements AfterViewChecked {
 
   ngAfterViewChecked() {
     console.log('Child components count', this.childsComp.length);
+    console.log(this.simpleRef.nativeElement.textContent);
   }
 
   ngAfterViewInit() {

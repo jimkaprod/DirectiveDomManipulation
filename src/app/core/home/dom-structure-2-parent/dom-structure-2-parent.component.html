@@ -4,8 +4,13 @@
   <app-dom-structure-1-child #child></app-dom-structure-1-child>
 </ng-template>
 
+<span #simpleRef>hey simple ref</span>
+
 <div *ngIf="checker()">yeah</div>
 
 <div *ngIf="checked">yo</div>
 
 <button (click)="removeChild()">remove child</button>
+
+<h3 class="mt-5">list</h3>
+<ul #myList></ul>

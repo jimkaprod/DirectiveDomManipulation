@@ -21,7 +21,7 @@ export class DomStructure1ParentComponent implements AfterViewChecked {
   constructor(private renderer: Renderer2, private host: ElementRef) {}
 
   ngAfterViewChecked() {
-    console.log(this.childComp.length);
+    console.log('++>>', this.childComp.length);
   }
 
   removeChild() {

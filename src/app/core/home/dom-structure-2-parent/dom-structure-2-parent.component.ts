@@ -19,20 +19,21 @@ import { DomStructure1ChildComponent } from '../dom-structure-1-child/dom-struct
   imports: [DomStructure1ChildComponent],
 })
 export class DomStructure2ParentComponent implements AfterViewChecked {
-  @ViewChildren('child', { read: ElementRef }) childComp: QueryList<ElementRef>;
+  @ViewChildren('child', { read: ElementRef })
+  childsComp: QueryList<ElementRef>;
 
   @ViewChild('viewcontainer', { read: ViewContainerRef }) viewcontainer;
 
-  @ViewChild(TemplateRef) template: TemplateRef<null>;
+  @ViewChild('t', { read: TemplateRef }) template: TemplateRef<ElementRef>;
 
   constructor(private renderer: Renderer2, private host: ElementRef) {}
 
   ngAfterViewChecked() {
-    console.log('Child components count', this.childComp.length);
+    // console.log('Child components count', this.childsComp.length);
   }
 
   ngAfterViewInit() {
-    // this.viewcontainer.createEmbeddedView(this.template);
+    this.viewcontainer.createEmbeddedView(this.template);
   }
 
   removeChild() {

@@ -21,10 +21,8 @@ import { DomStructure1ChildComponent } from '../dom-structure-1-child/dom-struct
 export class DomStructure2ParentComponent implements AfterViewChecked {
   @ViewChildren('child', { read: ElementRef })
   childsComp: QueryList<ElementRef>;
-
   @ViewChild('viewcontainer', { read: ViewContainerRef }) viewcontainer;
-
-  @ViewChild('t', { read: TemplateRef }) template: TemplateRef<ElementRef>;
+  @ViewChild(TemplateRef) template: TemplateRef<null>;
 
   constructor(private renderer: Renderer2, private host: ElementRef) {}
 

@@ -1,8 +1,8 @@
 <button
-  *ngFor="let name of names; index as i"
-  (click)="currentTab = templates.get(i)"
+  *ngFor="let tab of tabs; index as i"
+  (click)="currentTab = tab.template"
 >
-  {{ name }}
+  {{ tab.name }}
 </button>
 
 <div class="border border-primary">

@@ -1,9 +1,11 @@
-import { Directive } from '@angular/core';
+import { Directive, Input, TemplateRef } from '@angular/core';
 
 @Directive({
   selector: '[appTab]',
   standalone: true,
 })
 export class TabDirective {
-  constructor() {}
+  @Input('appTab') name: string;
+
+  constructor(public template: TemplateRef<any>) {}
 }

@@ -16,10 +16,12 @@ import { TabDirective } from '../tab.directive';
   imports: [NgFor, NgTemplateOutlet],
 })
 export class DynamicComponent {
-  @Input('names') names: string[] = [];
+  // @Input('names') names: string[] = [];
 
-  @ContentChildren(TabDirective, { read: TemplateRef })
-  templates: QueryList<any>;
+  // @ContentChildren(TabDirective, { read: TemplateRef })
+  // templates: QueryList<any>;
+
+  @ContentChildren(TabDirective) tabs: QueryList<TabDirective>;
 
   currentTab: TemplateRef<any>;
 }

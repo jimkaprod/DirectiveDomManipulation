@@ -8,3 +8,68 @@
 <div class="border border-primary">
   <ng-container *ngTemplateOutlet="currentTab; context: ctx"></ng-container>
 </div>
+
+<!-- <ng-template #testTemplate>
+<div>Some Code.</div>
+</ng-template>
+
+<ng-container *ngTemplateOutlet="testTemplate"></ng-container>
+<ng-container *ngTemplateOutlet="testTemplate"></ng-container> -->
+
+<ng-template #testTemplate let-name="name">
+  <div>My name is {{ name }}.</div>
+</ng-template>
+
+<ng-container
+  *ngTemplateOutlet="testTemplate; context: { name: 'John' }"
+></ng-container>
+<ng-container
+  *ngTemplateOutlet="testTemplate; context: { name: 'Jenny' }"
+></ng-container>
+
+<ng-template #subform let-formGroup="formGroup">
+  <div [formGroup]="formGroup">
+    <div>
+      <label>Name</label>
+      <input formControlName="name" />
+    </div>
+    <div>
+      <label>age</label>
+      <input formControlName="age" />
+    </div>
+    <div>
+      <label>gender</label>
+      <input formControlName="gender" />
+    </div>
+  </div>
+</ng-template>
+
+<div class="mt-5 border border-primary" [formGroup]="receptionistForm">
+  <ng-container
+    *ngTemplateOutlet="
+      subform;
+      context: {
+        formGroup: receptionistForm
+      }
+    "
+  ></ng-container>
+  <div>
+    <label>language</label>
+    <input formControlName="language" />
+  </div>
+</div>
+
+<div class="mt-5 border border-primary" [formGroup]="clerkForm">
+  <ng-container
+    *ngTemplateOutlet="
+      subform;
+      context: {
+        formGroup: clerkForm
+      }
+    "
+  ></ng-container>
+  <div>
+    <label>typeSpeed</label>
+    <input formControlName="typeSpeed" />
+  </div>
+</div>

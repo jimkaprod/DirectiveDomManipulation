@@ -6,6 +6,7 @@ import {
   QueryList,
   TemplateRef,
 } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { TabDirective } from '../tab.directive';
 
 @Component({
@@ -13,7 +14,7 @@ import { TabDirective } from '../tab.directive';
   templateUrl: './dynamic.component.html',
   styleUrls: ['./dynamic.component.css'],
   standalone: true,
-  imports: [NgFor, NgTemplateOutlet],
+  imports: [NgFor, NgTemplateOutlet, ReactiveFormsModule],
 })
 export class DynamicComponent {
   // @Input('names') names: string[] = [];
@@ -26,4 +27,10 @@ export class DynamicComponent {
   ctx = { title: 'This is some context' };
 
   currentTab: TemplateRef<any>;
+
+  constructor(private fb: FormBuilder) {}
+
+  receptionistForm = this.fb.group({});
+
+  clerkForm = this.fb.group({});
 }

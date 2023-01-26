@@ -20,3 +20,10 @@
     <button type="button" class="btn btn-primary">Footer button</button>
   </footer>
 </app-multiple>
+
+<h2 class="mt-5">Dynamic</h2>
+<app-dynamic [names]="['Tab 1', 'Tab 2', 'Tab 3']">
+  <ng-template appTab>Content for the 1st tab</ng-template>
+  <ng-template appTab>Content for the 2nd tab</ng-template>
+  <ng-template appTab>Content for the 3rd tab</ng-template>
+</app-dynamic>

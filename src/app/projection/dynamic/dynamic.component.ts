@@ -23,5 +23,7 @@ export class DynamicComponent {
 
   @ContentChildren(TabDirective) tabs: QueryList<TabDirective>;
 
+  ctx = { title: 'This is some context' };
+
   currentTab: TemplateRef<any>;
 }

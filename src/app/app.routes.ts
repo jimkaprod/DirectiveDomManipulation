@@ -20,6 +20,12 @@ export const APP_ROUTES: Routes = [
         (m) => m.MainComponent
       ),
   },
+  {
+    path: 'projection',
+    title: 'Projection',
+    loadComponent: () =>
+      import('./projection/main/main.component').then((m) => m.MainComponent),
+  },
   // Option 1: Lazy Loading another Routing Config
   // {
   //   path: 'user-details',

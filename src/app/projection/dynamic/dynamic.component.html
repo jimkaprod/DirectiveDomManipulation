@@ -27,7 +27,7 @@
   *ngTemplateOutlet="testTemplate; context: { name: 'Jenny' }"
 ></ng-container>
 
-<ng-template #subform let-formGroup="formGroup">
+<!-- <ng-template #subform let-formGroup="formGroup">
   <div [formGroup]="formGroup">
     <div>
       <label>Name</label>
@@ -72,4 +72,10 @@
     <label>typeSpeed</label>
     <input formControlName="typeSpeed" />
   </div>
-</div>
+</div> -->
+
+<ng-template #test let-name="name">
+Hello, my name is {{name}}
+</ng-template>
+
+<app-test [template]="test"></app-test>

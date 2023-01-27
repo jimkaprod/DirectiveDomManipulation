@@ -8,13 +8,14 @@ import {
 } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { TabDirective } from '../tab.directive';
+import { TestComponent } from '../test/test.component';
 
 @Component({
   selector: 'app-dynamic',
   templateUrl: './dynamic.component.html',
   styleUrls: ['./dynamic.component.css'],
   standalone: true,
-  imports: [NgFor, NgTemplateOutlet, ReactiveFormsModule],
+  imports: [NgFor, NgTemplateOutlet, ReactiveFormsModule, TestComponent],
 })
 export class DynamicComponent {
   // @Input('names') names: string[] = [];

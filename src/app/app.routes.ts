@@ -26,6 +26,12 @@ export const APP_ROUTES: Routes = [
     loadComponent: () =>
       import('./projection/main/main.component').then((m) => m.MainComponent),
   },
+  {
+    path: 'projection2',
+    title: 'Projection2',
+    loadComponent: () =>
+      import('./projection2/main/main.component').then((m) => m.MainComponent),
+  },
   // Option 1: Lazy Loading another Routing Config
   // {
   //   path: 'user-details',

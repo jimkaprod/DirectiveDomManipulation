@@ -8,6 +8,7 @@ import {
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
+import { ServiceLoaderService } from '../../service/service-loader.service';
 import { AddContentDirective } from '../add-content.directive';
 import { AppendTargetDirective } from '../append-target.directive';
 
@@ -32,9 +33,13 @@ export class ListComponent implements OnInit {
 
   @ViewChild('myTarget') myTarget: TemplateRef<any>;
 
+  @ViewChild('dynamic', { read: ViewContainerRef })
+  dynamic: ViewContainerRef;
+
   constructor(
     private viewContainerRef: ViewContainerRef,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
+    private service: ServiceLoaderService
   ) {}
 
   ngOnInit() {
@@ -45,12 +50,18 @@ export class ListComponent implements OnInit {
   ngAfterViewChecked(): void {}
 
   ngAfterViewInit(): void {
-    this.list.forEach((item) => {
+    this.list.forEach((item, index) => {
       this.viewContainerRef.createEmbeddedView(this.itemTpl, {
         $implicit: item,
+        index,
       });
     });
     this.isLoaded = true;
     // this.cdRef.detectChanges();
+  }
+
+  addTemplate(index: number): void {
+    // console.log(this.viewContainerRef.get(0).);
+    this.service.addDynamicComponent(this.dynamic);
   }
 }

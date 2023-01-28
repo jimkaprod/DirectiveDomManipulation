@@ -1,4 +1,4 @@
-<ng-template #itemTpl let-item>
+<ng-template #itemTpl let-item let-index>
   <div class="card">
     <div class="card-header">Featured</div>
     <div class="card-body">
@@ -6,11 +6,11 @@
       <p class="card-text">{{ item.description }}</p>
       <button
         class="btn btn-primary"
-        (click)="(null)"
+        (click)="addTemplate(index)"
         appAddContent
         [template]="dynamic"
-        [child]="child"
       >
+        <!--         [vcr]="vcr" -->
         Go somewhere
       </button>
       <ng-template #dynamic></ng-template>

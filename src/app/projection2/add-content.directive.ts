@@ -23,13 +23,12 @@ export class AddContentDirective {
 
   @Input() template: TemplateRef<any>;
 
-  @Input() child: TemplateRef<{}>;
-
   // appendTarget: TemplateRef<any>;
 
   constructor(
     private elemRef: ElementRef,
-    private service: ServiceLoaderService // private appendTargetDirective: AppendTargetDirective
+    private service: ServiceLoaderService 
+    // private appendTargetDirective: AppendTargetDirective
   ) {}
 
   ngOnInit(): void {
@@ -37,19 +36,8 @@ export class AddContentDirective {
   }
 
   @HostListener('click') onMouseClick() {
-    const view = this.child.createEmbeddedView(null);
-    // this.template.insert(view);
-    console.log('caaalick>', view);
-    // @HostListener('click', ['$event'])
-    // public click(e: Event): void {
-    // console.log("--->>", this.elemRef.nativeElement.parentNode)
-    // console.log("--->0>", this.tplAddContent)
-    // console.log("--->1>", this.appAddContent)
-    // console.log("--->2>", this.viewContainer)
-    // this.viewContainer.insert(view);
-
-    // this.appendTarget = this.appendTargetDirective.appAppendTarget;
-
-    // e.preventDefault();
+    // const view = this.template.createEmbeddedView(null);
+    // this.service.addDynamicComponent(view);
+    // this.service.addDynamicComponent(this.template);
   }
 }

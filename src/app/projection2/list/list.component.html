@@ -8,13 +8,12 @@
         class="btn btn-primary"
         (click)="(null)"
         appAddContent
-        [template]="tmp"
+        [template]="dynamic"
         [child]="child"
       >
         Go somewhere
       </button>
-      <ng-template #tmp> Some content of the template </ng-template>
-      <!-- <ng-template [appAppendTarget]="myTarget"></ng-template> -->
+      <ng-template #dynamic></ng-template>
     </div>
   </div>
 </ng-template>

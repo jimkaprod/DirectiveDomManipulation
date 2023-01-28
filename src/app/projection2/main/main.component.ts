@@ -12,6 +12,7 @@ import {
   ViewChildren,
   ViewContainerRef,
 } from '@angular/core';
+import { ServiceLoaderService } from '../../service/service-loader.service';
 import { AddContentDirective } from '../add-content.directive';
 import { ListComponent } from '../list/list.component';
 import { SimpleDirective } from './simple.directive';
@@ -69,7 +70,11 @@ export class MainComponent implements OnInit {
 
   isLoaded: boolean;
 
-  constructor(private renderer: Renderer2, private cdRef: ChangeDetectorRef) {}
+  constructor(
+    private renderer: Renderer2,
+    private cdRef: ChangeDetectorRef,
+    private service: ServiceLoaderService
+  ) {}
 
   ngOnInit() {}
 

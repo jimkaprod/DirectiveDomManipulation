@@ -7,6 +7,7 @@ import {
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
+import { ServiceLoaderService } from '../service/service-loader.service';
 import { AppendTargetDirective } from './append-target.directive';
 
 @Directive({
@@ -27,9 +28,9 @@ export class AddContentDirective {
   // appendTarget: TemplateRef<any>;
 
   constructor(
-    private elemRef: ElementRef
-  ) // private appendTargetDirective: AppendTargetDirective
-  {}
+    private elemRef: ElementRef,
+    private service: ServiceLoaderService // private appendTargetDirective: AppendTargetDirective
+  ) {}
 
   ngOnInit(): void {
     console.log('directive');

@@ -30,6 +30,7 @@ export const APP_ROUTES: Routes = [
   {
     path: 'projection2',
     title: 'Projection2',
+    providers: [ServiceLoaderService],
     loadComponent: () =>
       import('./projection2/main/main.component').then((m) => m.MainComponent),
   },

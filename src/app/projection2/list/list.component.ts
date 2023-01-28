@@ -8,6 +8,8 @@ import {
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
+import { AddContentDirective } from '../add-content.directive';
+import { AppendTargetDirective } from '../append-target.directive';
 
 interface ListItem {
   titre: string;
@@ -19,7 +21,7 @@ interface ListItem {
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css'],
   standalone: true,
-  imports: [NgIf],
+  imports: [NgIf, AddContentDirective, AppendTargetDirective],
 })
 export class ListComponent implements OnInit {
   @ViewChild('itemTpl') itemTpl: TemplateRef<any>;
@@ -27,6 +29,8 @@ export class ListComponent implements OnInit {
   @Input() list: ListItem[];
 
   isLoaded: boolean;
+
+  @ViewChild('myTarget') myTarget: TemplateRef<any>;
 
   constructor(
     private viewContainerRef: ViewContainerRef,

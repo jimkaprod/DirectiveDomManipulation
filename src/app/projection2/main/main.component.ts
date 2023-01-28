@@ -13,7 +13,7 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { AddContentDirective } from '../add-content.directive';
-import { ListComponent } from './list/list.component';
+import { ListComponent } from '../list/list.component';
 import { SimpleDirective } from './simple.directive';
 
 interface ListItem {
@@ -36,7 +36,7 @@ interface ListItem {
   ],
 })
 export class MainComponent implements OnInit {
-  @HostBinding('role') role = 'button';
+  // @HostBinding('role') role = 'button';
 
   @HostBinding('class.add-class') hasCss = true;
 
@@ -74,6 +74,19 @@ export class MainComponent implements OnInit {
   ngOnInit() {}
 
   ngAfterContentInit(): void {}
+
+  // ngAfterViewInit(): void {
+  // outputs `I am span`
+  // console.log(this.simpleElemRef);
+  // let view = this.tpl.createEmbeddedView(null);
+  // let view2 = this.tpl.createEmbeddedView(null);
+  // this.listContainerRef.insert(view);
+  // this.listContainerRef.insert(view2);
+  // console.log('listContainerRef>>>');
+  // console.log('tpl>>>', this.tpls);
+  // this.listContainerRef.clear()
+  // this.renderer
+  // }
 
   ngAfterViewChecked(): void {
     //   this.listItem.forEach((item) => {

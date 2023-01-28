@@ -1,0 +1,21 @@
+<ng-template #itemTpl let-item>
+    <div class="card">
+      <div class="card-header">
+        Featured
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">{{item.titre}}</h5>
+        <p class="card-text">{{item.description}}</p>
+        <button class="btn btn-primary" (click)="null" appAddContent [template]="tmp" [child]="child">Go somewhere</button>
+        <ng-template #tmp>
+          Some content of the template
+        </ng-template>
+        <!-- <ng-template [appAppendTarget]="myTarget"></ng-template> -->
+      </div>
+    </div>
+</ng-template>
+
+
+<ng-template #child>
+<div>ouch</div>
+</ng-template>

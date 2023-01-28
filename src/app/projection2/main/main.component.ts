@@ -13,6 +13,7 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { AddContentDirective } from '../add-content.directive';
+import { ListComponent } from './list/list.component';
 import { SimpleDirective } from './simple.directive';
 
 interface ListItem {
@@ -31,6 +32,7 @@ interface ListItem {
     NgIf,
     NgFor,
     AddContentDirective,
+    ListComponent,
   ],
 })
 export class MainComponent implements OnInit {
@@ -65,24 +67,25 @@ export class MainComponent implements OnInit {
     },
   ];
 
+  isLoaded: boolean;
+
   constructor(private renderer: Renderer2, private cdRef: ChangeDetectorRef) {}
 
   ngOnInit() {}
 
-  ngAfterContentInit(): void {
-    
-  }
+  ngAfterContentInit(): void {}
 
   ngAfterViewChecked(): void {
-    this.listItem.forEach((item) => {
-      this.listContainerRef.createEmbeddedView(this.itemTpl, {
-        $implicit: item,
-      });
-    });
+    //   this.listItem.forEach((item) => {
+    //     this.listContainerRef.createEmbeddedView(this.itemTpl, {
+    //       $implicit: item,
+    //     });
+    //   });
+    //   this.isLoaded = true;
     this.cdRef.detectChanges();
   }
 
-  ngAfterViewInit(): void {}
+  // ngAfterViewInit(): void {}
 
   toggle(index: number): void {
     console.log('length>>>>', this.tplCards.length);

@@ -7,7 +7,7 @@
 <h2 class="my-5">List</h2>
 
 
-<ng-template #itemTpl let-item>
+<!-- <ng-template #itemTpl let-item>
   <div class="card">
     <div class="card-header">
       Featured
@@ -23,8 +23,9 @@
 
 
 <ng-container #listContainerRef>
-</ng-container>
+</ng-container> -->
 
+<app-list [list]="listItem"></app-list>
 
 <button class="btn btn-primary" (click)="vienwContainerClear()">Clear</button>
 

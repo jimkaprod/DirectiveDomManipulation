@@ -3,3 +3,59 @@
 <div #simpleElemRef>i am a div</div>
 
 <div appSimple>i am a div</div>
+
+<h2 class="my-5">List</h2>
+
+
+<ng-template #itemTpl let-item>
+  <div class="card">
+    <div class="card-header">
+      Featured
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{item.titre}}</h5>
+      <p class="card-text">{{item.description}}</p>
+      <a href="#" class="btn btn-primary">Go somewhere</a>
+      <ng-template></ng-template>
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-container #listContainerRef>
+</ng-container>
+
+
+<button class="btn btn-primary" (click)="vienwContainerClear()">Clear</button>
+
+
+<!-- <ng-template *ngFor="let item of listItem" #tplCard> -->
+<!-- <ng-template ngFor let-item [ngForOf]="listItem" #tplCard> -->
+<!-- <ng-template let-item="item" let-index="index" #tplCards>
+  <div class="card">
+    <div class="card-header">
+      Featured
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{item.titre}}</h5>
+      <p>{{item.description}}</p>
+      <button class="btn btn-primary" (click)="toggle(index)">Go somewhere</button>
+      <ng-container #expendedViewRef></ng-container>
+      <ng-template #tplAddContent></ng-template>
+    </div>
+  </div>
+</ng-template> -->
+
+<!-- <ng-container [ngTemplateOutlet]="tplCard"></ng-container> -->
+
+
+<!-- <ng-container
+  [ngIf]="false"
+  #cardContainerRef
+  *ngFor="let item of listItem; let index=index"
+  [ngTemplateOutlet]="tplCards"
+  [ngTemplateOutletContext]="{item: item, index: index}"
+>
+</ng-container> -->
+
+<!--   [ngTemplateOutletContext]="{individual: individual}"> -->

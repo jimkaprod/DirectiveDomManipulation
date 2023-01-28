@@ -22,6 +22,12 @@ export class SimpleDirective implements OnInit {
 
   @HostBinding('style.border-color') borderColor!: string;
 
+  @HostBinding('style.border') border: string = '3px dashed';
+
+  @HostBinding('style.padding-left') pl: string = '3px';
+
+
+
   constructor(private elem: ElementRef) { 
     console.log("11>", this.elem)
   }
@@ -39,7 +45,11 @@ export class SimpleDirective implements OnInit {
 
   @HostListener('click', ['$event'])
   public click(e: Event): void {
-    console.log("click", e.target)
+    const colorPick = Math.floor(Math.random() * this.possibleColors.length);
+
+    this.color = this.borderColor = this.possibleColors[colorPick];
+
+    this.pl = '50px';
   }
 
 }

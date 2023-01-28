@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+import { JsonPipe, NgIf } from '@angular/common';
 import {
   ChangeDetectorRef,
   Component,
@@ -22,7 +22,7 @@ interface ListItem {
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css'],
   standalone: true,
-  imports: [NgIf, AddContentDirective, AppendTargetDirective],
+  imports: [NgIf, AddContentDirective, AppendTargetDirective, JsonPipe],
 })
 export class ListComponent implements OnInit {
   @ViewChild('itemTpl') itemTpl: TemplateRef<any>;
@@ -52,8 +52,7 @@ export class ListComponent implements OnInit {
   ngAfterViewInit(): void {
     this.list.forEach((item, index) => {
       this.viewContainerRef.createEmbeddedView(this.itemTpl, {
-        $implicit: item,
-        index,
+        $implicit: { item, index },
       });
     });
     this.isLoaded = true;
@@ -61,7 +60,9 @@ export class ListComponent implements OnInit {
   }
 
   addTemplate(index: number): void {
-    // console.log(this.viewContainerRef.get(0).);
-    this.service.addDynamicComponent(this.dynamic);
+    // const tpl: TemplateRef<any> = this.viewContainerRef.get(0);
+    this.viewContainerRef.remove(index);
+    console.log(index);
+    // this.service.addDynamicComponent(this.dynamic);
   }
 }

@@ -1,12 +1,12 @@
-<ng-template #itemTpl let-item let-index>
+<ng-template #itemTpl let-data>
   <div class="card">
     <div class="card-header">Featured</div>
     <div class="card-body">
-      <h5 class="card-title">{{ item.titre }}</h5>
-      <p class="card-text">{{ item.description }}</p>
+      <h5 class="card-title">{{ data.item.titre }}</h5>
+      <p class="card-text">{{ data.item.description }}</p>
       <button
         class="btn btn-primary"
-        (click)="addTemplate(index)"
+        (click)="addTemplate(data.index)"
         appAddContent
         [template]="dynamic"
       >

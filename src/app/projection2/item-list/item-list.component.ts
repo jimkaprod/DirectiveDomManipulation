@@ -54,7 +54,8 @@ export class ItemListComponent implements OnInit {
   }
 
   addToIt2(view: EmbeddedViewRef<any>) {
-    this.toggleContent.emit(this.dynamic);
+    this.toggleContent2.emit(this.dynamic);
+
     // this.displayIt = true;
     // this.service.addDynamicComponent(this.dynamic);
   }

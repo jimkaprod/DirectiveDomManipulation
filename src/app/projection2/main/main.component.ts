@@ -141,15 +141,18 @@ export class MainComponent implements OnInit {
   }
 
   toggleContent(viewContainerRef: ViewContainerRef): void {
-    console.log('-->', viewContainerRef.element);
+    console.log('-xx->', viewContainerRef.element);
     this.service.addDynamicComponent(viewContainerRef);
-    console.log('TOGGLE');
+    console.log('TOGGLE1');
   }
 
   toggleContent2(viewContainerRef: ViewContainerRef): void {
-    console.log('-->', viewContainerRef.element);
+    const elemRef: ElementRef = viewContainerRef.element;
+    console.log(elemRef);
+    console.log('-0->', viewContainerRef.element);
+    console.log('-1->', this.newList.length);
     this.service.addDynamicComponent(viewContainerRef);
-    console.log('TOGGLE');
+    console.log('TOGGLE2');
   }
 
   removeComponent(view: EmbeddedViewRef<any>): void {

@@ -38,6 +38,8 @@ export class ListComponent implements OnInit {
   @ViewChild('dynamic', { read: ViewContainerRef })
   dynamic: ViewContainerRef;
 
+  displayIt: boolean = false;
+
   constructor(
     private viewContainerRef: ViewContainerRef,
     private cdRef: ChangeDetectorRef,
@@ -81,10 +83,15 @@ export class ListComponent implements OnInit {
     // this.service.addDynamicComponent(this.dynamic);
   }
 
-  deleteIt(option) {
-    console.log(option.viewIndexRef)
+  addToIt(option) {
+    this.displayIt = true;
+    this.service.addDynamicComponent(this.dynamic);
+  }
+
+  deleteIt(viewIndexRef) {
+    console.log(viewIndexRef);
     //get viewRef from context and then get index of the viewref
-    let index = this.viewContainerRef.indexOf(option.viewIndexRef);
+    let index = this.viewContainerRef.indexOf(viewIndexRef);
     //remove the view
     this.viewContainerRef.remove(index);
   }

@@ -1,5 +1,6 @@
 <ng-template #itemTpl let-option="option" let-index="index">
   <div class="card">
+    <span *ngIf="displayIt">displayIt</span>
     <div class="card-header">Featured</div>
     <div class="card-body">
       <h5 class="card-title">
@@ -9,10 +10,13 @@
         {{ option.item.description }}
       </p>
 
-      <button class="btn btn-primary" (click)="deleteIt(option)">
-        Go somewhere
+      <button class="btn btn-primary" (click)="addToIt(option)">
+        Add content
       </button>
-      <!-- <ng-template #dynamic></ng-template> -->
+      <button class="btn btn-primary" (click)="deleteIt(option.viewIndexRef)">
+        Remove component
+      </button>
+      <ng-template #dynamic></ng-template>
     </div>
   </div>
 </ng-template>

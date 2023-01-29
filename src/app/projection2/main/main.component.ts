@@ -3,6 +3,7 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
+  EmbeddedViewRef,
   HostBinding,
   OnInit,
   QueryList,
@@ -14,6 +15,7 @@ import {
 } from '@angular/core';
 import { ServiceLoaderService } from '../../service/service-loader.service';
 import { AddContentDirective } from '../add-content.directive';
+import { ItemListComponent } from '../item-list/item-list.component';
 import { ListComponent } from '../list/list.component';
 import { SimpleDirective } from './simple.directive';
 
@@ -34,6 +36,7 @@ interface ListItem {
     NgFor,
     AddContentDirective,
     ListComponent,
+    ItemListComponent,
   ],
 })
 export class MainComponent implements OnInit {
@@ -52,6 +55,11 @@ export class MainComponent implements OnInit {
   listContainerRef: ViewContainerRef;
 
   @ViewChild('itemTpl') itemTpl: TemplateRef<any>;
+
+  @ViewChild('newList', { read: ViewContainerRef })
+  newList: ViewContainerRef;
+
+  @ViewChild('itemListTpl') itemListTpl: TemplateRef<any>;
 
   listItem: ListItem[] = [
     {
@@ -78,7 +86,23 @@ export class MainComponent implements OnInit {
 
   ngOnInit() {}
 
-  ngAfterContentInit(): void {}
+  ngAfterViewInit(): void {
+    console.log('ngAfterViewChecked');
+    this.listItem.forEach((item, index) => {
+      let view: EmbeddedViewRef<any> = this.newList.createEmbeddedView(
+        this.itemListTpl,
+        {
+          option: {
+            item: this.listItem[index],
+            divId: `thumbnail-${index}`,
+            closeId: `close-${index}`,
+          },
+        }
+      );
+      view.context.option.viewIndexRef = view;
+    });
+    this.cdRef.detectChanges();
+  }
 
   // ngAfterViewInit(): void {
   // outputs `I am span`
@@ -93,15 +117,15 @@ export class MainComponent implements OnInit {
   // this.renderer
   // }
 
-  ngAfterViewChecked(): void {
-    //   this.listItem.forEach((item) => {
-    //     this.listContainerRef.createEmbeddedView(this.itemTpl, {
-    //       $implicit: item,
-    //     });
-    //   });
-    //   this.isLoaded = true;
-    this.cdRef.detectChanges();
-  }
+  // ngAfterViewChecked(): void {
+  //   this.listItem.forEach((item) => {
+  //     this.listContainerRef.createEmbeddedView(this.itemTpl, {
+  //       $implicit: item,
+  //     });
+  //   });
+  //   this.isLoaded = true;
+  // this.cdRef.detectChanges();
+  // }
 
   // ngAfterViewInit(): void {}
 
@@ -114,5 +138,29 @@ export class MainComponent implements OnInit {
 
   vienwContainerClear(): void {
     this.listContainerRef.clear();
+  }
+
+  toggleContent(viewContainerRef: ViewContainerRef): void {
+    console.log('-->', viewContainerRef.element);
+    this.service.addDynamicComponent(viewContainerRef);
+    console.log('TOGGLE');
+  }
+
+  toggleContent2(viewContainerRef: ViewContainerRef): void {
+    console.log('-->', viewContainerRef.element);
+    this.service.addDynamicComponent(viewContainerRef);
+    console.log('TOGGLE');
+  }
+
+  removeComponent(view: EmbeddedViewRef<any>): void {
+    const index = this.newList.indexOf(view);
+    console.log('index>>>>', index);
+    this.newList.remove(index);
+    console.log('REMOVE');
+  }
+
+  removeComponent2(viewContainerRef: ViewContainerRef): void {
+    viewContainerRef.clear();
+    console.log('REMOVE2');
   }
 }

@@ -6,7 +6,6 @@
 
 <h2 class="my-5">List</h2>
 
-
 <!-- <ng-template #itemTpl let-item>
   <div class="card">
     <div class="card-header">
@@ -25,10 +24,23 @@
 <ng-container #listContainerRef>
 </ng-container> -->
 
-<app-list [list]="listItem"></app-list>
+<!-- <app-list [list]="listItem"></app-list> -->
+
+<ng-template let-option="option" let-index="index" #itemListTpl>
+  <app-item-list
+    [item]="option"
+    (toggleContent)="toggleContent($event)"
+    (toggleContent2)="toggleContent2($event)"
+    (removeComponent)="removeComponent($event)"
+    (removeComponent2)="removeComponent2($event)"
+  >
+  </app-item-list>
+</ng-template>
+
+<ng-container #newList></ng-container>
+<!-- listItem -->
 
 <button class="btn btn-primary" (click)="vienwContainerClear()">Clear</button>
-
 
 <!-- <ng-template *ngFor="let item of listItem" #tplCard> -->
 <!-- <ng-template ngFor let-item [ngForOf]="listItem" #tplCard> -->
@@ -48,7 +60,6 @@
 </ng-template> -->
 
 <!-- <ng-container [ngTemplateOutlet]="tplCard"></ng-container> -->
-
 
 <!-- <ng-container
   [ngIf]="false"

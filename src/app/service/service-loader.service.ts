@@ -3,14 +3,14 @@ import {
   Injectable,
   Inject,
   ReflectiveInjector,
-ViewContainerRef,
+  ViewContainerRef,
 } from '@angular/core';
 import { DynamicComponent } from './dynamic-component/dynamic.component';
 @Injectable()
 export class ServiceLoaderService {
   constructor() {}
-  
+
   addDynamicComponent(viewContainerRef: ViewContainerRef) {
-    viewContainerRef.createComponent(DynamicComponent)
+    viewContainerRef.createComponent(DynamicComponent);
   }
 }

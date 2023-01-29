@@ -1,0 +1,27 @@
+<div class="card">
+  <span *ngIf="displayIt">displayIt</span>
+  <div class="card-header">Featured</div>
+  <div class="card-body">
+    <h5 class="card-title">
+      {{ item.item.titre }}
+    </h5>
+    <p class="card-text">
+      {{ item.item.description }}
+    </p>
+
+    <button class="btn btn-primary" (click)="addToIt(item.viewIndexRef)">
+      Add content
+    </button>
+    <button class="btn btn-primary" (click)="addToIt2(item.viewIndexRef)">
+      Add content 2
+    </button>
+    <button class="btn btn-primary" (click)="deleteIt(item.viewIndexRef)">
+      Remove component
+    </button>
+    <button class="btn btn-primary" (click)="deleteIt2(item.viewIndexRef)">
+      Remove component 2
+    </button>
+    <!-- <ng-template #dynamic></ng-template> -->
+    <ng-container #dynamic></ng-container>
+  </div>
+</div>

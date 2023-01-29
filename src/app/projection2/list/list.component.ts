@@ -2,11 +2,13 @@ import { JsonPipe, NgIf } from '@angular/common';
 import {
   ChangeDetectorRef,
   Component,
+  EmbeddedViewRef,
   Input,
   OnInit,
   TemplateRef,
   ViewChild,
   ViewContainerRef,
+  ViewRef,
 } from '@angular/core';
 import { ServiceLoaderService } from '../../service/service-loader.service';
 import { AddContentDirective } from '../add-content.directive';
@@ -51,9 +53,21 @@ export class ListComponent implements OnInit {
 
   ngAfterViewInit(): void {
     this.list.forEach((item, index) => {
-      this.viewContainerRef.createEmbeddedView(this.itemTpl, {
-        $implicit: { item, index },
-      });
+      let view: EmbeddedViewRef<any> = this.viewContainerRef.createEmbeddedView(
+        this.itemTpl,
+        {
+          option: {
+            item: this.list[index],
+            divId: `thumbnail-${index}`,
+            closeId: `close-${index}`,
+          },
+        }
+      );
+      view.context.option.viewIndexRef = view;
+
+      // this.viewContainerRef.createEmbeddedView(this.itemTpl, {
+      //   $implicit: { item, index },
+      // });
     });
     this.isLoaded = true;
     // this.cdRef.detectChanges();
@@ -62,7 +76,16 @@ export class ListComponent implements OnInit {
   addTemplate(index: number): void {
     // const tpl: TemplateRef<any> = this.viewContainerRef.get(0);
     this.viewContainerRef.remove(index);
+    this.cdRef.detectChanges();
     console.log(index);
     // this.service.addDynamicComponent(this.dynamic);
+  }
+
+  deleteIt(option) {
+    console.log(option.viewIndexRef)
+    //get viewRef from context and then get index of the viewref
+    let index = this.viewContainerRef.indexOf(option.viewIndexRef);
+    //remove the view
+    this.viewContainerRef.remove(index);
   }
 }

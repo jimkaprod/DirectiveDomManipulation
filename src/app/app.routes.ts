@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './core/home/home.component';
 import { ServiceLoaderService } from './service/service-loader.service';
+import { ComponentLoaderService } from './core/services/component-loader.service';
 
 export const APP_ROUTES: Routes = [
   {
@@ -38,6 +39,13 @@ export const APP_ROUTES: Routes = [
     path: 'service',
     title: 'Service',
     providers: [ServiceLoaderService],
+    loadComponent: () =>
+      import('./service/main/main.component').then((m) => m.MainComponent),
+  },
+  {
+    path: 'list',
+    title: 'list',
+    providers: [ComponentLoaderService],
     loadComponent: () =>
       import('./service/main/main.component').then((m) => m.MainComponent),
   },

@@ -47,7 +47,9 @@ export const APP_ROUTES: Routes = [
     title: 'list',
     providers: [ComponentLoaderService],
     loadComponent: () =>
-      import('./service/main/main.component').then((m) => m.MainComponent),
+      import('./components/list/main/main.component').then(
+        (m) => m.MainComponent
+      ),
   },
   // Option 1: Lazy Loading another Routing Config
   // {

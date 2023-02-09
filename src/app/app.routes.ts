@@ -2,6 +2,8 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './core/home/home.component';
 import { ServiceLoaderService } from './service/service-loader.service';
 import { ComponentLoaderService } from './core/services/component-loader.service';
+import { NasaService } from './core/services/nasa.service';
+import { ListService } from './components/list/services/list.service';
 
 export const APP_ROUTES: Routes = [
   {

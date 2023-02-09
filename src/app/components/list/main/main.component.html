@@ -1,1 +1,10 @@
-<h1>LIST</h1>
+<h1>LISTING</h1>
+
+<ng-container *ngFor="let item of list$ | async">
+  <app-list [item]="item">
+  </app-list> 
+</ng-container>
+<br
+MARS>> {{(marsPhotos$ | async)?.length}}
+<!-- <app-card-image></app-card-image>
+<app-card-image-top></app-card-image-top> -->

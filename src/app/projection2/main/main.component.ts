@@ -18,6 +18,7 @@ import { AddContentDirective } from '../add-content.directive';
 import { ItemListComponent } from '../item-list/item-list.component';
 import { ListComponent } from '../list/list.component';
 import { SimpleDirective } from './simple.directive';
+import { ListService } from '../../components/list/services/list.service';
 
 interface ListItem {
   titre: string;

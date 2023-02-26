@@ -1,0 +1,12 @@
+{
+  "/spoonacular/*": {
+    "target": "https://api.spoonacular.com/food",
+    "secure": false,
+    "logLevel": "debug",
+    "cookieDomainRewrite": "localhost"  
+  }
+}
+
+// "changeOrigin": false,
+// "headers": {"x-api-key": "92fb028d7009434da92ed6a69ea3f30a"}
+

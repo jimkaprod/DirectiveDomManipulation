@@ -7,6 +7,9 @@ import { CardImageComponent } from '../../../core/components/card-image/card-ima
 import { CardImageTopComponent } from '../../../core/components/card-image-top/card-image-top.component';
 import { HttpClientModule } from '@angular/common/http';
 import { tap } from 'rxjs';
+import { IngredientService } from '../../../food/services/ingredient.service';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { SearchService } from '../../../deezer/services/search.service';
 
 
 @Component({
@@ -20,24 +23,41 @@ import { tap } from 'rxjs';
     NgFor,
     CardImageComponent,
     CardImageTopComponent,
+    ReactiveFormsModule,
   ],
   providers: [
     ListService,
     NasaService,
+    IngredientService,
   ],
 })
 export class MainComponent implements OnInit {
-  list$ = this.listService.getListItems();
-  marsPhotos$ = this.nasaService.getMarsPhotos();
+  list$ = this.listService.itemsList$;
+  marsPhotos$ = this.nasaService.marsPhotos$;
+  ingredients$ = this.ingredientService.ingredient$;
+  selectedIngredient$ = this.ingredientService.selectedIngredient$;
+  search$ = this.searchService.searchResults$;
+
+  formGroup = this.fb.group({
+    ingredientCtrl: ['', [Validators.required]]
+  });
 
   constructor(
     private listService: ListService,
     private nasaService: NasaService,
+    private ingredientService: IngredientService,
+    private searchService: SearchService,
+    private fb: FormBuilder,
   ) {
     console.log("ECHO")
   }
 
   ngOnInit() {
 
+  }
+
+  submit(): void {
+    this.ingredientService.changeSelectedProduct('banana');
+    console.log("formGroupValue>>>", this.formGroup.value);
   }
 }

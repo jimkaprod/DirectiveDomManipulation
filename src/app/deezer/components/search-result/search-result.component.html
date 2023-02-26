@@ -1,0 +1,19 @@
+<ng-container *ngIf="(searchCategory$ | async) as searchCategory">
+  <app-card-header 
+    [category]="searchCategory" 
+    [resultCount]="searchResults?.data?.length"
+  >
+    <div>
+      <h1>Results : searchResults?.data?.length</h1>
+    </div>
+  </app-card-header>  
+  <ng-template 
+    #searchComponentRef 
+    appSearchHost 
+    (elementVisible)="emitElementVisible($event)"
+  >
+  </ng-template>
+</ng-container>
+
+
+

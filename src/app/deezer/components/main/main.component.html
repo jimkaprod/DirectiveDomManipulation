@@ -1,0 +1,8 @@
+<h1>DEEZER!</h1>
+
+<app-search></app-search>
+<ng-container *ngIf="!(isLoading$ | async)">
+  <ng-container *ngIf="(searchResults$ |  async) as searchResults">
+    <app-search-result [searchResults]="searchResults"></app-search-result>
+  </ng-container>
+</ng-container>

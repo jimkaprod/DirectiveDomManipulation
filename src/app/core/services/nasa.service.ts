@@ -28,4 +28,11 @@ export class NasaService {
       );
   }
 
+  params = new HttpParams({ fromObject: { api_key: this.API_KEY, sol: 1000, page: 2 } });
+  options = { params: this.params };
+  marsPhotos$: Observable<MarsPhoto[]> = this.http.get<MarsPhoto[]>(this.BASE_URL + this.MARS_PHOTO_PATH, this.options)
+    .pipe(
+      map((results) => results['photos'])
+    );
+
 }

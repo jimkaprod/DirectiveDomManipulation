@@ -1,10 +1,28 @@
 <h1>LISTING</h1>
 
-<ng-container *ngFor="let item of list$ | async">
+<!-- <ng-container *ngFor="let item of list$ | async">
   <app-list [item]="item">
   </app-list> 
-</ng-container>
-<br
-MARS>> {{(marsPhotos$ | async)?.length}}
-<!-- <app-card-image></app-card-image>
-<app-card-image-top></app-card-image-top> -->
+</ng-container> -->
+<div [formGroup]="formGroup">
+<input 
+  formControlName="ingredientCtrl"
+  class="form-control" 
+  placeholder="Ingredient name" 
+  aria-label="Ingredient name"
+>
+<button 
+  [disabled]="formGroup?.invalid"
+  (click)="submit()"
+  class="btn btn-primary mb-3"
+>Confirm identity</button>
+</div>
+===
+{{selectedIngredient$ | async}}
+{{search$ | async}}
++++
+<!-- <ng-container *ngFor="let marsPhoto of marsPhotos$ | async">
+  <app-list [item]="marsPhoto">
+  </app-list> 
+</ng-container> -->
+

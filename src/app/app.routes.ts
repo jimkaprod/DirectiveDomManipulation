@@ -4,6 +4,7 @@ import { ServiceLoaderService } from './service/service-loader.service';
 import { ComponentLoaderService } from './core/services/component-loader.service';
 import { NasaService } from './core/services/nasa.service';
 import { ListService } from './components/list/services/list.service';
+import { SearchComponentLoaderService } from './deezer/services/search-component-loader.service';
 
 export const APP_ROUTES: Routes = [
   {
@@ -50,6 +51,15 @@ export const APP_ROUTES: Routes = [
     providers: [ComponentLoaderService],
     loadComponent: () =>
       import('./components/list/main/main.component').then(
+        (m) => m.MainComponent
+      ),
+  },
+  {
+    path: 'deez',
+    title: 'deezer',
+    providers: [SearchComponentLoaderService],
+    loadComponent: () =>
+      import('./deezer/components/main/main.component').then(
         (m) => m.MainComponent
       ),
   },

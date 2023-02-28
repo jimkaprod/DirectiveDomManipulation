@@ -1,6 +1,13 @@
 import { EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 
+export interface ResultComponent {
+  searchResults$: Observable<Search>;
+  elementVisible: EventEmitter<boolean>;
+  trackByIndex: ((index: number, item: Album | Artiste) => number);
+}
+
+
 export interface Search {
   data: (Album | Artiste)[];
   prev?: string;
@@ -14,28 +21,11 @@ export interface SearchString {
   index?: number;
 }
 
-
 export interface Id {
   id: number;
   type: string;
 }
 
-export interface DynamicSearchComponent {
-  searchResults$: Observable<Search>;
-  elementVisible: EventEmitter<boolean>;
-}
-
-
-// export type AlbumSearch = Search & Album;
-
-// export type ArtisteSearch = Search & Artiste;
-
-export type TypeName = "album" | "artiste";
-
-export type ObjectType<T> =
-  T extends "album" ? Album[] :
-  T extends "artiste" ? Artiste[] :
-  never;
 
 export interface Picture {
   picture?: string;
@@ -62,19 +52,11 @@ export interface Album extends Id {
   artist?: Artiste;
 }
 
-// export interface Album extends Id {
-//   data: AlbumDetails;
-// }
-
 export interface Artiste extends Id, Picture {
   name: string;
   link: string;
   tracklist: string;
 }
-
-// export interface Artiste {
-//   data: ArtisteDetails;
-// }
 
 export interface PlaylistSearch extends Id, Picture {
   title: string;

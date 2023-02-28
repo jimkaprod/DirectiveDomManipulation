@@ -24,9 +24,17 @@ export class SearchService {
 
   public searchResults = new BehaviorSubject<Search>(null);
 
+  resetSearchResults: boolean;
+
+  params: HttpParams;
+
+  categories$ = of(["album", "artist", "history", "playlist", "podcast", "radio", "track", "user"]);
+
   searchResults$ = this.searchAction$.pipe(
     filter((searchParams) => !!searchParams),
     switchMap(({ search, category, index }) => {
+      this.resetSearchResults = category !== this.searchCategory.getValue();
+
       this.searchCategory.next(category);
 
       this.params = new HttpParams({
@@ -48,16 +56,8 @@ export class SearchService {
 
       return result;
     }),
-    map((result) => {
-      const { data, next, total } = { ...this.searchResults?.value };
-      const updatedData: (Album | Artiste)[] = data ? [...data, ...result.data] : [...result.data];
-      const updatedValue = {
-        data: updatedData,
-        total,
-        next: result.next,
-      };
-      this.searchResults.next(updatedValue)
-      return updatedValue;
+    map((searchResults, resetSearchResults) => {
+      return this.updateSearchResults(searchResults);
     }),
     tap((result) => {
       this.isLoading.next(false);
@@ -70,13 +70,27 @@ export class SearchService {
     private http: HttpClient
   ) {}
 
-  params: HttpParams;
-
-  categories$ = of(["album", "artist", "history", "playlist", "podcast", "radio", "track", "user"]);
-
   get category(): string {
     return this.searchCategory.getValue();
   }
+
+  updateSearchResults(searchResults: Search): Search {
+    if (this.resetSearchResults) {
+      this.searchResults.next(null);
+    }
+
+    const { data, total } = { ...this.searchResults?.value };
+    const updatedData: (Album | Artiste)[] = data ? [...data, ...searchResults.data] : [...searchResults.data];
+    const updatedValue = {
+      data: updatedData,
+      total,
+      next: searchResults.next,
+    };
+
+    this.searchResults.next(updatedValue)
+    return updatedValue;
+  }
+
 
   changeSearchString(search: string, category: string, index?: number): void {
     this.searchAction.next({ search, category, index });

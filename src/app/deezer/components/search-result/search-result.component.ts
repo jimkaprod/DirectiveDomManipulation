@@ -1,8 +1,7 @@
-import { Component, Input, OnInit, SimpleChanges, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, Input, ViewChild, ViewContainerRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SearchService } from '../../services/search.service';
-import { FormBuilder } from '@angular/forms';
-import { Album, Artiste, DynamicSearchComponent, ObjectType, PlaylistSearch, PodcastSearch, Search, TrackSearch, TypeName, UserSearch } from '../../models/search.model';
+import { Search } from '../../models/search.model';
 import { SearchComponentLoaderService } from '../../services/search-component-loader.service';
 import { CardHeaderComponent } from './components/card-header/card-header.component';
 import { SearchHostDirective } from '../../directives/search-host.directive';

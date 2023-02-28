@@ -1,4 +1,20 @@
 <p>artiste-card works!</p>
-  <div *ngFor="let result of searchResults.data; let i=index">
-    {{result?.id}}
+<ng-container *ngFor="let result of (searchResults$ | async)?.data as data; let i=index;  trackBy: trackByIndex">
+  <div 
+    appAmIVisible
+    [isTargetElement]="i === (data.length-3)"
+    (elementVisible)="emitElementVisible($event)"
+  >
+    {{i}} * {{result?.id}} * {{result?.name}} * {{result?.link}} * {{result?.tracklist}}
+    
+  name: string;
+  link: string;
+  tracklist: string;
+
+    <img 
+      [ngSrc]="result?.picture_medium"
+      width="56"
+      height="56"
+    >
   </div>
+</ng-container>

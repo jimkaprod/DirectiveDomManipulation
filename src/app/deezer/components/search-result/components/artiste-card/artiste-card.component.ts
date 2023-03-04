@@ -20,5 +20,5 @@ export class ArtisteCardComponent implements ResultComponent {
 
   searchResults$: Observable<Search>;
 
-  trackByIndex = (index: number, item: Artiste) => index;
+  trackByIndex = (index: number, item: Artiste) => item.id;
 }

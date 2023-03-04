@@ -1,7 +1,7 @@
-import { EventEmitter, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject, catchError, combineLatest, concatMap, delay, filter, map, mergeMap, of, scan, shareReplay, switchMap, tap, throwError } from 'rxjs';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Album, Artiste, PlaylistSearch, PodcastSearch, Search, SearchString, TrackSearch, UserSearch } from '../models/search.model';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, catchError, filter, map, of, shareReplay, switchMap, tap, throwError } from 'rxjs';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Album, Artiste, Playlist, Podcast, Search, SearchString, Track, User } from '../models/search.model';
 
 
 
@@ -28,7 +28,7 @@ export class SearchService {
 
   params: HttpParams;
 
-  categories$ = of(["album", "artist", "history", "playlist", "podcast", "radio", "track", "user"]);
+  categories$ = of(["album", "artist", "playlist", "podcast", "track", "user"]);
 
   searchResults$ = this.searchAction$.pipe(
     filter((searchParams) => !!searchParams),
@@ -56,7 +56,19 @@ export class SearchService {
 
       return result;
     }),
-    map((searchResults, resetSearchResults) => {
+    map((searchResults) => {
+      const items = [];
+      searchResults.data.forEach((item: any, index: number) => {
+        if(index % 3 == 0) {
+            let row = [];
+            row.push(item);
+            items.push(row);
+        } else {
+          items[items.length - 1].push(item);
+        }
+      });
+
+      searchResults.data = items;
       return this.updateSearchResults(searchResults);
     }),
     tap((result) => {
@@ -80,7 +92,7 @@ export class SearchService {
     }
 
     const { data, total } = { ...this.searchResults?.value };
-    const updatedData: (Album | Artiste)[] = data ? [...data, ...searchResults.data] : [...searchResults.data];
+    const updatedData: (Album[] | Artiste[] | Playlist[] | Podcast[] | Track[] | User[])[] = data ? [...data, ...searchResults.data] : [...searchResults.data];
     const updatedValue = {
       data: updatedData,
       total,

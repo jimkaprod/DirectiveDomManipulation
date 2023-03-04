@@ -1,0 +1,38 @@
+.grid-container {
+    // display: grid;
+    display: inline-grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(auto-fill, 120px);
+    // grid-row-gap: .5em;
+    grid-column-gap: 1em;
+}
+
+.grid-row {
+}
+
+
+.card {
+    max-width: 250px;
+    flex: 1 1 0;
+}
+
+.img-container {
+    background: blue;
+    position: relative;
+    flex: 1 1 0;
+}
+
+.img-container > img{
+    height:250px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.card-title {
+    white-space: normal;
+    word-wrap:break-word;
+}
+
+.card-text {
+    // font-size: 0.8vw;
+}

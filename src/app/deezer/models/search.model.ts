@@ -4,12 +4,12 @@ import { Observable } from 'rxjs';
 export interface ResultComponent {
   searchResults$: Observable<Search>;
   elementVisible: EventEmitter<boolean>;
-  trackByIndex: ((index: number, item: Album | Artiste) => number);
+  trackByIndex: ((index: number, item: Album | Artiste | Playlist | Podcast | Track | User) => number);
 }
 
 
 export interface Search {
-  data: (Album | Artiste)[];
+  data: (Album[] | Artiste[] | Playlist[] | Podcast[] | Track[] | User[])[];
   prev?: string;
   next?: string;
   total: number;
@@ -58,7 +58,7 @@ export interface Artiste extends Id, Picture {
   tracklist: string;
 }
 
-export interface PlaylistSearch extends Id, Picture {
+export interface Playlist extends Id, Picture {
   title: string;
   public: boolean;
   nb_tracks: number;
@@ -68,15 +68,15 @@ export interface PlaylistSearch extends Id, Picture {
   creation_date: string;
   md5_image: string;
   picture_type: string;
-  user: UserSearch;
+  user: User;
 }
 
-export interface UserSearch extends Id, Picture {
+export interface User extends Id, Picture {
   name: string;
   tracklist: string;
 }
 
-export interface PodcastSearch extends Id, Picture {
+export interface Podcast extends Id, Picture {
   title: string;
   description: string;
   available: boolean;
@@ -85,7 +85,7 @@ export interface PodcastSearch extends Id, Picture {
   share: string;
 }
 
-export interface TrackSearch extends Id {
+export interface Track extends Id {
   readable: boolean;
   title: string;
   title_short: string;

@@ -1,0 +1,31 @@
+<div [formGroup]="formGroup">
+<input 
+  formControlName="searchCtrl"
+  class="form-control" 
+  placeholder="Ingredient name" 
+  aria-label="Ingredient name"
+  appAutofocus
+>
+
+<div class="btn-group mt-2" role="group" aria-label="Basic radio toggle button group">
+  <ng-container *ngFor="let category of categories$ | async; let i=index">
+    <input 
+      type="radio" 
+      class="btn-check" 
+      name="btnradio" 
+      [id]="'btnradio'+i"
+      [value]="category"
+      formControlName="categoryCtrl"
+      autocomplete="off"
+    />
+    <label class="btn btn-outline-primary" [for]="'btnradio'+i">{{category}}</label>  
+  </ng-container>
+</div>
+
+<div class="mt-2">
+  <button 
+    [disabled]="formGroup?.invalid"
+    (click)="submit()"
+    class="btn btn-primary mb-3"
+  >Search</button>
+</div>

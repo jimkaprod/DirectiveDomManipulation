@@ -1,0 +1,16 @@
+<p>user-card works!</p>
+<ng-container *ngFor="let result of (searchResults$ | async)?.data as data; let i=index;  trackBy: trackByIndex">
+    <div 
+      appAmIVisible
+      [isTargetElement]="i === (data.length-3)"
+      (elementVisible)="emitElementVisible($event)"
+    >
+      {{i}} - {{result?.id}} - {{result?.name}} - {{result?.tracklist}}
+      <img 
+        [ngSrc]="result?.picture_small"
+        width="56"
+        height="56"
+      >
+    </div>
+  </ng-container>
+

@@ -1,8 +1,7 @@
 <h1>DEEZER!</h1>
+<div class="mb-2">
+  <button routerLink="/deez/main/search" class="btn btn-primary me-2">Search</button>
+  <button routerLink="/deez/main/components" class="btn btn-primary">Build</button>
+</div>
+<router-outlet></router-outlet>
 
-<app-search></app-search>
-<ng-container *ngIf="!(isLoading$ | async)">
-  <ng-container *ngIf="(searchResults$ |  async) as searchResults">
-    <app-search-result [searchResults]="searchResults"></app-search-result>
-  </ng-container>
-</ng-container>

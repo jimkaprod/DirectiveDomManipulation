@@ -1,8 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule, JsonPipe } from '@angular/common';
-import { SearchComponent } from '../search/search.component';
-import { SearchResultComponent } from '../search-result/search-result.component';
-import { SearchService } from '../../services/search.service';
+import { Component } from '@angular/core';
+import { RouterModule, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -10,18 +7,9 @@ import { SearchService } from '../../services/search.service';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
   imports: [
-    CommonModule,
-    SearchComponent,
-    SearchResultComponent,
-    JsonPipe,
+    RouterModule,
   ],
 })
 export class MainComponent {
-  searchResults$ = this.searchService.searchResults$;
 
-  isLoading$ = this.searchService.isLoading$;
-
-  constructor(
-    private searchService: SearchService,
-  ) {}
 }

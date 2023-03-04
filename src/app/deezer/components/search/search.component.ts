@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { AsyncPipe, CommonModule, JsonPipe, NgFor, NgIf } from '@angular/common';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CommonModule, JsonPipe } from '@angular/common';
+import { SearchBarComponent } from '../search-bar/search-bar.component';
+import { SearchResultComponent } from '../search-result/search-result.component';
 import { SearchService } from '../../services/search.service';
-import { AutofocusDirective } from '../../directives/autofocus.directive';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -11,33 +12,18 @@ import { AutofocusDirective } from '../../directives/autofocus.directive';
   styleUrls: ['./search.component.scss'],
   imports: [
     CommonModule,
-    ReactiveFormsModule,
-    AsyncPipe,
+    SearchBarComponent,
+    SearchResultComponent,
     JsonPipe,
-    NgFor,
-    NgIf,
-    AutofocusDirective,
+    RouterOutlet,
   ],
 })
 export class SearchComponent {
-  formGroup = this.fb.group({
-    searchCtrl: ['', [Validators.required]],
-    categoryCtrl: ['', [Validators.required]]
-  });
+  searchResults$ = this.searchService.searchResults$;
 
-  categories$ = this.searchService.categories$;
-
+  isLoading$ = this.searchService.isLoading$;
 
   constructor(
     private searchService: SearchService,
-    private fb: FormBuilder,
   ) {}
-
-  submit(): void {
-    this.searchService.isLoading.next(true);
-    this.searchService.changeSearchString(
-      this.formGroup.get('searchCtrl').value,
-      this.formGroup.get('categoryCtrl').value,
-    );
-  }
 }

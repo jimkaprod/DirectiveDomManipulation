@@ -27,13 +27,18 @@ export class AmIVisibleDirective {
       this.intersectionCallback.bind(this),
       this.intersectionOptions
     );
+    console.log("---->>>>00--->>>", this.isTargetElement)
     if (this.isTargetElement) {
+      console.log("---->>>>11--->>>", this.element.nativeElement)
       observer.observe(this.element.nativeElement);
     }
   }
 
   intersectionCallback(entries, observer) {
+    console.log("intersectionCallback")
+
     entries.forEach((entry) => {
+      console.log('>>>>', entry.intersectionRatio, 1)
       if (entry.intersectionRatio === 1) {
         this.elementVisible.emit(true); //element is completely visible in the viewport
       } else {

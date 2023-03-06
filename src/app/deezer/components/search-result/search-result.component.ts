@@ -40,6 +40,7 @@ export class SearchResultComponent {
   }
 
   prevNext(elementVisible: boolean): void {
+    console.log("prevNext>>>>", elementVisible, this.searchResults.next)
     if (elementVisible && this.searchResults.next) {
       const index: number = +new URLSearchParams(this.searchResults.next).get("index");
       const { search, category } = this.searchService.searchAction.getValue();

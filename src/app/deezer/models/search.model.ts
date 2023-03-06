@@ -9,7 +9,7 @@ export interface ResultComponent {
 
 
 export interface Search {
-  data: (Album[] | Artiste[] | Playlist[] | Podcast[] | Track[] | User[])[];
+  data: (Album | Artiste | Playlist | Podcast | Track | User)[];
   prev?: string;
   next?: string;
   total: number;

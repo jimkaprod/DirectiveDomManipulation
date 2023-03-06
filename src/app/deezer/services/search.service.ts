@@ -57,18 +57,18 @@ export class SearchService {
       return result;
     }),
     map((searchResults) => {
-      const items = [];
-      searchResults.data.forEach((item: any, index: number) => {
-        if(index % 3 == 0) {
-            let row = [];
-            row.push(item);
-            items.push(row);
-        } else {
-          items[items.length - 1].push(item);
-        }
-      });
+      // const items = [];
+      // searchResults.data.forEach((item: any, index: number) => {
+      //   if(index % 3 == 0) {
+      //       let row = [];
+      //       row.push(item);
+      //       items.push(row);
+      //   } else {
+      //     items[items.length - 1].push(item);
+      //   }
+      // });
 
-      searchResults.data = items;
+      // searchResults.data = items;
       return this.updateSearchResults(searchResults);
     }),
     tap((result) => {
@@ -92,7 +92,7 @@ export class SearchService {
     }
 
     const { data, total } = { ...this.searchResults?.value };
-    const updatedData: (Album[] | Artiste[] | Playlist[] | Podcast[] | Track[] | User[])[] = data ? [...data, ...searchResults.data] : [...searchResults.data];
+    const updatedData: (Album | Artiste | Playlist | Podcast | Track | User)[] = data ? [...data, ...searchResults.data] : [...searchResults.data];
     const updatedValue = {
       data: updatedData,
       total,
